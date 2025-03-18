@@ -10,24 +10,26 @@
         :key="item.id"
         class="carousel-item relative"
       >
-        <img :src="item.imageUrl" :alt="item.name" class="w-full rounded-md" />
-        <div class="absolute top-4 left-4 text-white text-start">
-          <h3 class="text-xl font-semibold">{{ item.name }}</h3>
-          <p class="text-sm">{{ item.description }}</p>
-        </div>
-        <div class="absolute top-4 right-4">
-          <button class="btn btn-circle btn-sm">
-            <Heart />
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 text-white">
-          <p class="text-lg font-semibold">${{ item.price }}</p>
-        </div>
-        <div class="absolute bottom-4 right-4">
-          <button class="btn btn-sm bg-[#5f2121] text-white hover:bg-[#722929]">
-            Add to Cart
-          </button>
-        </div>
+        <router-link :to="`/product/${item.id}`">
+          <img :src="item.imageUrl" :alt="item.name" class="w-full rounded-md" />
+          <div class="absolute top-4 left-4 text-white text-start">
+            <h3 class="text-xl font-semibold">{{ item.name }}</h3>
+            <p class="text-sm">{{ item.description }}</p>
+          </div>
+          <div class="absolute top-4 right-4">
+            <button class="btn btn-circle btn-sm">
+              <Heart />
+            </button>
+          </div>
+          <div class="absolute bottom-4 left-4 text-white">
+            <p class="text-lg font-semibold">${{ item.price }}</p>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <button class="btn btn-sm bg-[#5f2121] text-white hover:bg-[#722929]">
+              Add to Cart
+            </button>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
