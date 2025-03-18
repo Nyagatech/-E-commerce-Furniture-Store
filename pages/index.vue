@@ -39,44 +39,34 @@
           Choose The Category <br />
           That You Want
         </h2>
-        <div
-          class="flex flex-wrap bg-base-300 w-full sm:w-4/5 md:w-3/4 lg:w-1/3 rounded-full justify-center gap-4 py-4 mx-auto"
-        >
-          <button
-            v-for="c in categories"
-            :key="c.name"
-           class=":hover:text-gray-500 "
-           :class="c.name === 'All Furniture' ? 'text-[#5f2121] font-bold' : 'text-gray-300'"
-          >
-            {{ c.name }}
-          </button>
+        <div class="text-center py-10">
+          <div class="flex flex-wrap justify-center gap-4">
+            <button
+              v-for="c in categoriesStore.getAllCategories"
+              :key="c.name"
+              class="hover:text-gray-500 p-2 rounded-md"
+              :class="{
+                'text-[#5f2121] font-bold': categoriesStore.selectedCategory === c.name,
+                'text-gray-300': categoriesStore.selectedCategory !== c.name,
+              }"
+              @click="categoriesStore.setSelectedCategory(c.name)"
+            >
+              {{ c.name }}
+            </button>
+          </div>
+          <div class="mt-8">
+            <Product />
+          </div>
         </div>
-        <div class="">
-          <Product />
-        </div>
-
-        
       </div>
-
     </section>
   </div>
 </template>
 
 <script setup>
-const categories = [
-  {
-    name: 'All Furniture',
-  },
-  {
-    name: 'Living Room',
-  },
-  {
-    name: 'Kitchen',
-  },
-  {
-    name:'Bedroom'
-  }
-];
+import { useCategoriesStore } from '~/stores/categories';
+ 
+const categoriesStore = useCategoriesStore();
 </script>
 
 <style></style>
