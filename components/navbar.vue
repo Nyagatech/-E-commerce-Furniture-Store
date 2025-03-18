@@ -50,10 +50,11 @@
       <Search class="w-6 h-6" />
 
       <ShoppingBag class="w-6 h-6" @click="openModal" />
+      <span v-if="cartLength > 0" class="badge badge-sm badge-primary">{{ cartLength }}</span>
       <dialog id="my_modal_2" class="modal">
         <div class="modal-box">
           <h3 class="text-lg font-bold">Shopping Cart</h3>
-          <div v-if="cartItems.length === 0">
+          <div v-if="cartItems && cartItems.length === 0">
             <p class="py-4">Your cart is empty.</p>
           </div>
           <div v-else>
@@ -81,11 +82,15 @@
 import { computed, onMounted } from 'vue';
 import { Search, Heart, ShoppingBag } from 'lucide-vue-next';
 import { useMyCartStore } from '~/stores/cart';
-const cartStore = useMyCartStore(); 
-const cartItems = computed(() => cartStore.cart);
+
+const cartStore = useMyCartStore();
+const cartItems = computed(() => cartStore.cart || []);
+const cartLength = computed(() => cartStore.cartLength);
 
 onMounted(() => {
-  cartStore.initializeCart();
+  if (!cartItems.value) {
+    cartStore.initializeCart();
+  }
 });
 
 function openModal() {
