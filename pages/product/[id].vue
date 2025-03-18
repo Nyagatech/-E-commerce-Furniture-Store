@@ -9,7 +9,7 @@
         />
         <div class="pl-8">
           <h1 class="text-5xl font-bold">{{ product.name }}</h1>
-          <p class="py-6 text-lg text-gray-700">
+          <p class="py-6 text-lg text-gray-400">
             {{ product.description }}
           </p>
           <div class="flex justify-evenly items-center">
@@ -37,9 +37,11 @@ const categoriesStore = useCategoriesStore();
 const product = ref(null);
 
 onMounted(() => {
+  // Fetch the product with the ID from the URL.
   const productId = parseInt(route.params.id, 10);
+  // Find the product with the ID in the products array.
   const foundProduct = categoriesStore.products.find(p => p.id === productId);
-
+//this fetches the product with the ID from the URL and assigns it to the product ref.
   if (foundProduct) {
     product.value = foundProduct;
   } else {

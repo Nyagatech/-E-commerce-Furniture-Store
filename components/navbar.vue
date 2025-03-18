@@ -23,7 +23,10 @@
           class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
         >
           <li v-for="l in links" :key="l.name">
-            <router-link :to="l.path" :class="{ 'font-semibold text-primary': $route.path === l.path }">
+            <router-link
+              :to="l.path"
+              :class="{ 'font-semibold text-primary': $route.path === l.path }"
+            >
               {{ l.name }}
             </router-link>
           </li>
@@ -34,7 +37,10 @@
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li v-for="l in links" :key="l.name">
-          <router-link :to="l.path" :class="{ 'font-semibold text-primary': $route.path === l.path }">
+          <router-link
+            :to="l.path"
+            :class="{ 'font-semibold text-primary': $route.path === l.path }"
+          >
             {{ l.name }}
           </router-link>
         </li>
@@ -42,9 +48,28 @@
     </div>
     <div class="navbar-end space-x-4 p-2">
       <Search class="w-6 h-6" />
-      <router-link to="/cart">
-        <ShoppingBag class="w-6 h-6" />
-      </router-link>
+
+      <ShoppingBag class="w-6 h-6" @click="openModal" />
+      <dialog id="my_modal_2" class="modal">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Shopping Cart</h3>
+          <div v-if="cartItems.length === 0">
+            <p class="py-4">Your cart is empty.</p>
+          </div>
+          <div v-else>
+            <div v-for="item in cartItems" :key="item.id" class="flex items-center py-2">
+              <img :src="item.imageUrl" :alt="item.name" class="w-16 h-16 object-cover rounded-md mr-4" />
+              <div>
+                <p class="font-semibold">{{ item.name }}</p>
+                <p>${{ item.price }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
       <router-link to="/wishlist">
         <Heart class="w-6 h-6" />
       </router-link>
@@ -53,7 +78,23 @@
 </template>
 
 <script setup>
+import { computed, onMounted } from 'vue';
 import { Search, Heart, ShoppingBag } from 'lucide-vue-next';
+import { useMyCartStore } from '~/stores/cart';
+const cartStore = useMyCartStore(); 
+const cartItems = computed(() => cartStore.cart);
+
+onMounted(() => {
+  cartStore.initializeCart();
+});
+
+function openModal() {
+  const modal = document.getElementById('my_modal_2');
+  if (modal) {
+    modal.showModal();
+  }
+}
+
 const links = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
@@ -61,5 +102,3 @@ const links = [
   { name: 'Contact', path: '/contact' },
 ];
 </script>
-
-<style></style>
