@@ -50,12 +50,15 @@
             <div class="absolute bottom-4 left-4 text-white">
               <p class="text-lg font-semibold">${{ product.price }}</p>
             </div>
-            <div class="absolute bottom-4 right-4">
-              <button class="btn btn-sm bg-[#5f2121] text-white hover:bg-[#722929]">
-                Add to Cart
-              </button>
-            </div>
           </router-link>
+          <div class="absolute bottom-4 right-4">
+            <button
+              class="btn btn-sm bg-[#5f2121] text-white hover:bg-[#722929]"
+              @click="addToCart(product)"
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -65,8 +68,15 @@
 <script setup>
 import { Heart } from 'lucide-vue-next';
 import { useCategoriesStore } from '~/stores/categories';
+import { useMyCartStore } from '~/stores/cart';
 
+//initiliazing the stores
 const categoriesStore = useCategoriesStore();
+const cartStore = useMyCartStore();
+
+function addToCart(product) {
+  cartStore.addToCart(product);
+}
 </script>
 
 <style></style>
