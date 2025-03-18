@@ -50,7 +50,7 @@
       <Search class="w-6 h-6" />
 
       <ShoppingBag class="w-6 h-6" @click="openModal" />
-      <span v-if="cartLength > 0" class="badge badge-sm badge-primary">{{ cartLength }}</span>
+      <span v-if="cartLength > 0" class="badge badge-sm badge-primary rounded-full">{{ cartLength }}</span>
       <dialog id="my_modal_2" class="modal">
         <div class="modal-box">
           <h3 class="text-lg font-bold">Shopping Cart</h3>
@@ -62,8 +62,16 @@
               <img :src="item.imageUrl" :alt="item.name" class="w-16 h-16 object-cover rounded-md mr-4" />
               <div>
                 <p class="font-semibold">{{ item.name }}</p>
-                <p>${{ item.price }}</p>
+                <p>${{ item.price }} x {{ item.quantity }}</p>
               </div>
+              <button class="btn btn-sm btn-circle ml-auto" @click="removeFromCart(item.id)">
+                <X />
+              </button>
+            </div>
+            <div class="mt-4">
+              <p class="font-semibold">Total: ${{ cartTotal }}</p>
+              <button class="btn btn-error btn-sm mt-2" @click="clearCart">Clear Cart</button>
+              <button class="btn btn-primary btn-sm mt-2 ml-2">Checkout</button>
             </div>
           </div>
         </div>
@@ -80,12 +88,13 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { Search, Heart, ShoppingBag } from 'lucide-vue-next';
+import { Search, Heart, ShoppingBag, X  } from 'lucide-vue-next';
 import { useMyCartStore } from '~/stores/cart';
 
 const cartStore = useMyCartStore();
 const cartItems = computed(() => cartStore.cart || []);
 const cartLength = computed(() => cartStore.cartLength);
+const cartTotal = computed(() => cartStore.cartTotal);
 
 onMounted(() => {
   if (!cartItems.value) {
@@ -98,6 +107,14 @@ function openModal() {
   if (modal) {
     modal.showModal();
   }
+}
+
+function removeFromCart(itemId) {
+  cartStore.removeFromCart(itemId);
+}
+
+function clearCart() {
+  cartStore.clearCart();
 }
 
 const links = [
