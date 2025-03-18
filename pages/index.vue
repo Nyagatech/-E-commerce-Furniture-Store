@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="sticky top-0 z-50">
-      <Navbar />
-    </div>
 
     <div class="hero min-h-screen">
       <div class="hero-content flex-col lg:flex-row-reverse">
@@ -22,11 +19,12 @@
                 Start shopping
               </button>
             </router-link>
-
-            <button class="btn bg-[#5f2121] hover:bg-[#722929] text-white">
-              Learn More
-            </button>
-          </div>
+            <router-link to="/about">
+              <button class="btn bg-[#5f2121] hover:bg-[#722929] text-white">
+                Learn More
+              </button>
+            </router-link>
+            </div>
         </div>
       </div>
     </div>
@@ -67,7 +65,7 @@
               </div>
             </div>
           </div>
-          <Footer/>
+        
         </div>
       </div>
     </div>
