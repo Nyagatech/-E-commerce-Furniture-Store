@@ -1,6 +1,12 @@
 <template>
   <div class="carousel carousel-center rounded-md m-4 gap-8">
-    <div v-if="categoriesStore.filteredProducts.length === 0">
+    <div v-if="categoriesStore.loading">
+      <p>Loading...</p>
+    </div>
+    <div v-else-if="categoriesStore.error">
+      <p>Error: {{ categoriesStore.error }}</p>
+    </div>
+    <div v-else-if="categoriesStore.filteredProducts.length === 0">
       <p>No products found in this category.</p>
     </div>
     <div
@@ -45,6 +51,7 @@ import { Heart } from 'lucide-vue-next';
 import { useCategoriesStore } from '~/stores/categories';
 import { useMyCartStore } from '~/stores/cart';
 import { useWishlistStore } from '~/stores/wishlist';
+import { onMounted } from 'vue';
 
 // Initialize stores
 const categoriesStore = useCategoriesStore();
@@ -70,6 +77,11 @@ function toggleWishlist(product, event) {
 function addToCart(item) {
   cartStore.addToCart(item);
 }
+
+// Fetch products on component mount
+onMounted(() => {
+  categoriesStore.fetchProducts();
+});
 </script>
 
 <style></style>
