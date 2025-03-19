@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel carousel-center rounded-md m-4 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 m-4">
     <div v-if="categoriesStore.loading">
       <p>Loading...</p>
     </div>
@@ -13,31 +13,36 @@
       v-else
       v-for="item in categoriesStore.filteredProducts"
       :key="item.id"
-      class="carousel-item relative"
+      class="relative w-full h-[300px]"
     >
-      <router-link :to="`/product/${item.id}`">
-        <img :src="item.image_path" :alt="item.name" class="w-full rounded-md" />
+      <router-link :to="`/product/${item.id}`" class="block w-full h-full">
+        <img
+          :src="item.image_path"
+          :alt="item.name"
+          class="w-full h-full rounded-md object-cover"
+          loading="lazy"
+        />
         <div class="absolute top-4 left-4 text-white text-start">
-          <h3 class="text-xl font-semibold">{{ item.name }}</h3>
-          <p class="text-sm">{{ item.description }}</p>
+          <h3 class="text-xl font-bold text-slate-950">{{ item.name }}</h3>
+          <p class="text-sm text-slate-800">{{ item.description }}</p>
         </div>
         <div class="absolute top-4 right-4">
           <button
             class="btn btn-circle btn-sm"
-            @click="toggleWishlist(item, $event)"
+            @click.stop="toggleWishlist(item, $event)"
             aria-label="Add to wishlist"
           >
             <Heart :class="{ 'text-red-500': isInWishlist(item) }" />
           </button>
         </div>
         <div class="absolute bottom-4 left-4 text-white">
-          <p class="text-lg font-semibold">${{ item.discount_price || item.price }}</p>
+          <p class="text-lg font-semibold">$ {{ item.discount_price || item.price }}</p>
         </div>
       </router-link>
       <div class="absolute bottom-4 right-4">
         <button
           class="btn btn-sm bg-[#5f2121] text-white hover:bg-[#722929]"
-          @click="addToCart(item)"
+          @click.stop="addToCart(item)"
         >
           Add to Cart
         </button>
@@ -84,4 +89,8 @@ onMounted(() => {
 });
 </script>
 
-<style></style>
+<style scoped>
+.carousel-item {
+  overflow: hidden;
+}
+</style>
