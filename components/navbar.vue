@@ -59,7 +59,7 @@
           </div>
           <div v-else>
             <div v-for="item in cartItems" :key="item.id" class="flex items-center py-2">
-              <img :src="item.imageUrl" :alt="item.name" class="w-16 h-16 object-cover rounded-md mr-4" />
+              <img :src="item.image_path" :alt="item.name" class="w-16 h-16 object-cover rounded-md mr-4" />
               <div>
                 <p class="font-semibold">{{ item.name }}</p>
                 <p>${{ item.price }} x {{ item.quantity }}</p>
