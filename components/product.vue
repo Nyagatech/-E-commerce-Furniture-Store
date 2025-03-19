@@ -14,7 +14,7 @@
           <h1 class="text-4xl lg:text-5xl font-bold mb-4 text-gray-800">
             Benefits you Get When Using Our Service
           </h1>
-          <p class="mb-6 text-gray-600">
+          <p class="mb-6 text-gray-600 text-start">
             Discover a world of quality furniture and decor. We're dedicated to providing you with
             stylish and comfortable pieces that transform your home.
           </p>

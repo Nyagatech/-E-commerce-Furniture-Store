@@ -15,7 +15,7 @@
             <p>${{ item.price }}</p>
             <div class="card-actions justify-end">
               <button class="btn btn-sm btn-primary" @click="addToCart(item)">Add to Cart</button>
-              <button class="btn btn-sm" @click="removeFromWishlist(item.id)">Remove</button>
+              <button class="btn btn-sm" @click="removeFromWishlist(itemId)">Remove</button>
             </div>
           </div>
         </div>

@@ -27,6 +27,11 @@
     <div v-else class="text-center py-10">
       <p>Product not found.</p>
     </div>
+    <div>
+      <h3 class="text-3xl font-bold text-center py-10">Other Products</h3>
+      <ProductsCard />
+    </div>
+    
   </div>
 </template>
 
@@ -35,6 +40,7 @@ import { ref, onMounted } from 'vue';
 import { useCategoriesStore } from '~/stores/categories';
 import { useMyCartStore } from '~/stores/cart';
 import { ShoppingBag } from 'lucide-vue-next';
+import ProductsCard from '~/components/productsCard.vue';
 
 // Initializing the stores
 const categoriesStore = useCategoriesStore();
