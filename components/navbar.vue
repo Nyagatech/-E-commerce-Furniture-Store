@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-base-200 rounded-full px-4 shadow-sm sticky top-0 z-2 container mx-auto">
+  <div class="navbar bg-base-200 rounded-full px-4 shadow-sm sticky top-0 z-50 container mx-auto">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -47,9 +47,7 @@
       </ul>
     </div>
     <div class="navbar-end space-x-4 p-2">
-      <Search class="w-6 h-6" />
-
-      <ShoppingBag class="w-6 h-6" @click="openModal" />
+        <ShoppingBag class="w-6 h-6" @click="openModal" />
       <span v-if="cartLength > 0" class="badge badge-sm badge-primary rounded-full">{{ cartLength }}</span>
       <dialog id="my_modal_2" class="modal">
         <div class="modal-box">
@@ -88,7 +86,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { Search, Heart, ShoppingBag, X  } from 'lucide-vue-next';
+import { Heart, ShoppingBag, X  } from 'lucide-vue-next';
 import { useMyCartStore } from '~/stores/cart';
 
 const cartStore = useMyCartStore();
@@ -119,8 +117,8 @@ function clearCart() {
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
+  { name: 'About', path: '/#' },
   { name: 'Products', path: '/products' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Contact', path: '/#' },
 ];
 </script>

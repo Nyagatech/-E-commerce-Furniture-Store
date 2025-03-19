@@ -16,7 +16,7 @@
             semper congue, euismod non, mi.
           </p>
           <div class="flex space-x-4">
-            <router-link to="/product">
+            <router-link to="/products">
               <button class="btn rounded-full border border-gray-50">
                 Start shopping
               </button>
