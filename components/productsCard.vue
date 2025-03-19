@@ -16,7 +16,7 @@
       class="carousel-item relative"
     >
       <router-link :to="`/product/${item.id}`">
-        <img :src="item.imageUrl" :alt="item.name" class="w-full rounded-md" />
+        <img :src="item.image_path" :alt="item.name" class="w-full rounded-md" />
         <div class="absolute top-4 left-4 text-white text-start">
           <h3 class="text-xl font-semibold">{{ item.name }}</h3>
           <p class="text-sm">{{ item.description }}</p>
@@ -31,7 +31,7 @@
           </button>
         </div>
         <div class="absolute bottom-4 left-4 text-white">
-          <p class="text-lg font-semibold">${{ item.price }}</p>
+          <p class="text-lg font-semibold">${{ item.discount_price || item.price }}</p>
         </div>
       </router-link>
       <div class="absolute bottom-4 right-4">
