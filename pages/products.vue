@@ -43,7 +43,7 @@
           <div class="relative">
             <router-link :to="`/product/${product.id}`">
               <img
-                :src="product.imageUrl"
+                :src="product.image_path"
                 :alt="product.name"
                 class="w-full h-64 object-cover rounded-md"
               />
