@@ -48,8 +48,8 @@
                 class="w-full h-64 object-cover rounded-md"
               />
               <div class="absolute top-4 left-4 text-white text-start">
-                <h3 class="text-xl font-semibold">{{ product.name }}</h3>
-                <p class="text-sm">{{ product.description }}</p>
+                <h3 class="text-xl font-bold text-slate-950">{{ product.name }}</h3>
+                <p class="text-sm text-slate-800">{{ product.description }}</p>
               </div>
               <div class="absolute bottom-4 left-4 text-white">
                 <p class="text-lg font-semibold">${{ product.price }}</p>
@@ -85,10 +85,12 @@ import { onMounted, computed } from 'vue';
 import { Heart } from 'lucide-vue-next';
 import { useCategoriesStore } from '~/stores/categories';
 import { useWishlistStore } from '~/stores/wishlist';
+import { useMyCartStore } from '~/stores/cart';
 
 // Initializing the stores
 const categoriesStore = useCategoriesStore();
 const wishlistStore = useWishlistStore();
+const cartStore = useMyCartStore();
 
 // Initialize wishlist on component mount
 onMounted(() => {
@@ -106,6 +108,10 @@ function addToWishlist(product) {
   } else {
     wishlistStore.addToWishlist(product);
   }
+}
+
+function addToCart(product) {
+  cartStore.addToCart(product);
 }
 </script>
 
